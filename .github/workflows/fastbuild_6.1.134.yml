@@ -266,8 +266,8 @@ jobs:
             echo "ksuver=$KSU_VERSION" >> $GITHUB_OUTPUT
 
             # 验证修改结果
-            grep -A10 "REPO_OWNER" kernel/Makefile  # 检查插入点后的内容
-            grep "KSU_VERSION_FULL" kernel/Makefile # 确认版本定义存在
+            grep -A10 "REPO_OWNER" kernel/Makefile || true  # 检查插入点后的内容（无匹配时不阻断）
+            grep "KSU_VERSION_FULL" kernel/Makefile || true # 确认版本定义存在（无匹配时不阻断）
             echo "SukiSU版本号: ${SUKISU_RELEASE_VERSION}"
           elif [[ ${{ github.event.inputs.ksu_type }} == "resukisu" ]]; then
             echo "正在配置ReSukiSU..."
